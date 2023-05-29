@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Деловая игра</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #ffeedf, #fdd2bf);
+      text-align: center;
+    }
+
+    h1 {
+      color: #993300;
+      font-family: Arial, sans-serif;
+    }
+
+    .game-container {
+      margin: 50px auto;
+      width: 500px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    p {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      background-color: #fdd2bf;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffaa88;
+    }
+  </style>
+</head>
+<body>
+  <h1>Деловая игра: Русский приехал в Китай</h1>
+  <div class="game-container">
+    <p>Вы приехали в Китай и хотите провести удачную бизнес встречу с китайским партнером.</p>
+    <p>Ответьте на вопросы и проверьте свои знания китайского бизнес этикета.</p>
+    <div id="question-container"></div>
+    <div id="result-container"></div>
+  </div>
+
+  <script>
+    var questions = [
+      {
+        text: "Вопрос 1: Какое место лучше выбрать для встречи?",
+        options: [
+          {
+            text: "Офис вашей компании",
+            image: "image-1.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Китайский ресторан",
+            image: "image-2.jpg",
+            isCorrect: true
+          },
+          {
+            text: "Отель",
+            image: "image-3.jpg",
+            isCorrect: false
+          }
+        ]
+      },
+      {
+        text: "Вопрос 2: Какая одежда подходит для бизнес встречи?",
+        options: [
+          {
+            text: "Традиционная китайская одежда",
+            image: "image-4.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Формальный стиль",
+            image: "image-5.jpg",
+            isCorrect: true
+          },
+          {
+            text: "Повседневный стиль",
+            image: "image-6.jpg",
+            isCorrect: false
+          }
+        ]
+      },
+      {
+        text: "Вопрос 3: Как вести диалог с китайским партнером?",
+        options: [
+          {
+            text: "Проявите личную инициативу и станьте доминирующей стороной в разговоре",
+            image: "image-7.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Проявите уважение и вежливость, уделяйте внимание деталям",
+            image: "image-8.jpg",
+            isCorrect: true
+          },
+          {
+            text: "Будьте прямолинейны и понятно говорите о своих интересах",
+            image: "image-9.jpg",
+            isCorrect: false
+          }
+        ]
+      },
+      {
+        text: "Вопрос 4: Какой будете использовать подход для успешного взаимодействия?",
+        options: [
+          {
+            text: "Поклониться и выразить уважение",
+            image: "image-10.jpg",
+            isCorrect: true
+          },
+          {
+            text: "Сказать приветственные слова на китайском языке",
+            image: "image-11.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Пожать руку и поздравить партнера с успехами",
+            image: "image-12.jpg",
+            isCorrect: false
+          }
+        ]
+      },
+      {
+        text: "Задание 5: Как будете обмениваться визитками?",
+        options: [
+          {
+            text: "Передать визитку с одной рукой, предварительно изучив ее содержание",
+            image: "image-13.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Просто передать визитку партнеру",
+            image: "image-14.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Передать визитку с двумя руками, приложившись левой рукой к правой предплечью",
+            image: "image-15.jpg",
+            isCorrect: true
+          }
+        ]
+      },
+      {
+        text: "Вопрос 6: Бизнес этикет - уход. Как правильно покинуть встречу",
+        options: [
+          {
+            text: "Поблагодарить партнера, выразить надежду на дальнейшее сотрудничество и уйти",
+            image: "image-16.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Попросить партнера провести вас до выхода и прощаться на выходе",
+            image: "image-17.jpg",
+            isCorrect: true
+          },
+          {
+            text: "Прощаться и уходить сразу после завершения встречи",
+            image: "image-18.jpg",
+            isCorrect: false
+          }
+        ]
+      },
+      {
+        text: "Вопрос 7: Задание 7: На каком транспорте лучше приехать на деловую встречу?",
+        options: [
+          {
+            text: "На арендованной (или своей) машине с водителем",
+            image: "image-19.jpg",
+            isCorrect: true
+          },
+          {
+            text: "На общественном транспорте",
+            image: "image-20.jpg",
+            isCorrect: false
+          },
+          {
+            text: "На велосипеде",
+            image: "image-21.jpg",
+            isCorrect: false
+          }
+        ]
+      },
+      {
+        text: "Вопрос 8: Стоит ли отрываться от общения с китайским партнером во время диалога?",
+        options: [
+          {
+            text: "Да",
+            image: "image-22.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Нет",
+            image: "image-23.jpg",
+            isCorrect: true
+          },
+          {
+            text: "Да, только если на мессенджер в телефоне",
+            image: "image-24.jpg",
+            isCorrect: false
+          }
+        ]
+      },
+      {
+        text: "Вопрос 9: Можно ли шутить над китайским партнером?",
+        options: [
+          {
+            text: "Да",
+            image: "image-25.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Да, но только по доброму",
+            image: "image-26.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Нет",
+            image: "image-27.jpg",
+            isCorrect: true
+          }
+        ]
+      },
+      {
+        text: "Вопрос 10: Какие темы нельзя затрагивать для разговора с китайским партнером",
+        options: [
+          {
+            text: "Поговорить о детях",
+            image: "image-28.jpg",
+            isCorrect: false
+          },
+          {
+            text: "Политические разговоры",
+            image: "image-29.jpg",
+            isCorrect: true
+          },
+          {
+            text: "Мнение о еде",
+            image: "image-30.jpg",
+            isCorrect: false
+          }
+        ]
+      }
+    ];
+
+    var currentQuestionIndex = 0;
+    var score = 0;
+
+    function initializeGame() {
+      showQuestion();
+    }
+
+    function showQuestion() {
+      var questionContainer = document.getElementById('question-container');
+      var currentQuestion = questions[currentQuestionIndex];
+
+      questionContainer.innerHTML = `
+        <p>${currentQuestion.text}</p>
+        <div class="options-container">
+          ${currentQuestion.options.map((option, index) => `
+            <button onclick="handleAnswer(${index})">
+              ${option.text}
+              <br>
+            </button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function handleAnswer(selectedIndex) {
+      var currentQuestion = questions[currentQuestionIndex];
+      var selectedOption = currentQuestion.options[selectedIndex];
+
+      if (selectedOption.isCorrect) {
+        score++;
+      }
+
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      var resultContainer = document.getElementById('result-container');
+      var resultMessage = '';
+
+      if (score < 2) {
+        resultMessage = 'Вы провели неуспешную встречу с китайским партнером.';
+      } else if (score < 4) {
+        resultMessage = 'Вы провели встречу лояльно.';
+      } else if (score < 6) {
+        resultMessage = 'Вы провели встречу хорошо.';
+      } else if (score < 8) {
+        resultMessage = 'Вы провели встречу успешно.';
+      } else {
+        resultMessage = 'Вы гуру в общении с китайскими партнерами.';
+      }
+
+      resultContainer.innerHTML = `
+        <h2>Результаты</h2>
+        <p>Ваш счет: ${score} из ${questions.length}</p>
+        <p>${resultMessage}</p>
+      `;
+    }
+
+    initializeGame();
+  </script>
+</body>
+</html>
